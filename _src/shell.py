@@ -27,6 +27,8 @@ HTML = """<!doctype html>
    **별표 두 개** = 강조 ｜ "왼쪽 | 오른쪽" = 세로줄로 좌우 구분
    dog = 강아지 컷아웃 (후킹 · 학원소개 · 마무리 세 장에만 들어갑니다) */
 const STYLE = %(style)s;
+const FOOT = %(foot)s;   // 'go24' | 'insta'
+const INSTA = '@_ko.do.a';
 const THEME = %(theme)s;
 const ACADEMY = '한국반려동물전문학원';
 const CARDS = %(cards)s;
@@ -79,9 +81,14 @@ function card(c,i){
   if(STYLE==='cute-bubble') bd=eye+'<div class="bub">'+ttl+sub+txt+block+'</div>'+pill+big+note;
   else bd=eye+rule+ttl+sub+txt+block+pill+big+note;
 
-  const gobar='<div class="gobar"><img src="'+IMG.logo_go+'"/><span>국비지원 신청은 고용24에서</span></div>';
+  const IGSVG='<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.4"/>'+
+    '<circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>';
+  const gobar = FOOT==='insta'
+    ? '<div class="gobar insta">'+IGSVG+'<span>'+INSTA+'</span></div>'
+    : '<div class="gobar"><img src="'+IMG.logo_go+'"/><span>국민내일배움카드 국비지원 과정</span></div>';
   let ftr='';
-  if(STYLE==='chic-bold') ftr='<div class="ftr"><div class="cta">'+rich(c.btn||c.pill||'국비지원 상담 문의하기')+'</div>'+gobar+'</div>';
+  if(STYLE==='chic-bold') ftr='<div class="ftr'+(FOOT==='insta'?' ig':'')+'"><div class="cta">'+
+    rich(c.btn||c.pill||'국비지원 상담 문의하기')+'</div>'+gobar+'</div>';
   else if(c.go) ftr='<div class="ftr">'+gobar+'</div>';
 
   let deco='';
@@ -145,16 +152,18 @@ window.addEventListener('resize',render);render();
 </script></body></html>
 """
 
-def build(target, idx, style, style_name, mood, theme, cards, prefix, title):
+def build(target, idx, style, style_name, mood, theme, cards, prefix, title, foot='go24'):
     used = sorted({c['dog'] for c in cards if c.get('dog')})
-    imgs = {'logo_kda': datauri('logo_kda.webp'), 'logo_go': datauri('logo_go.webp')}
+    imgs = {'logo_kda': datauri('logo_kda.webp')}
+    if foot != 'insta':
+        imgs['logo_go'] = datauri('logo_go.webp')
     for u in used:
         imgs[u] = datauri(u + '.webp')
     return HTML % {
         'title': title, 'target': target, 'idx': idx, 'style_name': style_name, 'mood': mood,
         'n': len(cards), 'css': APP_CSS + CARD_CSS,
         'card_css': json.dumps(CARD_CSS, ensure_ascii=False),
-        'style': json.dumps(style), 'theme': json.dumps(theme, ensure_ascii=False),
+        'style': json.dumps(style), 'foot': json.dumps(foot), 'theme': json.dumps(theme, ensure_ascii=False),
         'cards': json.dumps(cards, ensure_ascii=False, indent=2),
         'imgs': json.dumps(imgs), 'prefix': json.dumps(prefix, ensure_ascii=False),
     }

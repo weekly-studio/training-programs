@@ -17,38 +17,43 @@ for f in os.listdir(OUT):
 
 made = []
 for t in TARGETS:
-    for v in (1, 2):
+    vers = (t['pick'],) if t.get('pick') else (1, 2)
+    for v in vers:
         sty = t['styles'][v-1]
         cs = cards(t['code'], v)
         # ── 강아지 컷아웃은 흐름에 맞춰 3장에만 ──────────────
         #    1장 후킹 / 6장 학원 소개 / 마지막 상담 CTA
         hook, merit, closing = t['dogs']
+        hook_only = t.get('dog_mode') == 'hook'
         for c in cs:
-            if c['t'] == 'hook':            c['dog'] = hook
-            elif c.get('slot') == 'merit':  c['dog'] = merit
-            elif c['t'] == 'cta':           c['dog'] = closing
+            if c['t'] == 'hook':                           c['dog'] = hook
+            elif hook_only:                                pass
+            elif c.get('slot') == 'merit':                 c['dog'] = merit
+            elif c['t'] == 'cta':                          c['dog'] = closing
         fn = '%s_시안%d-%s.html' % (t['slug'], v, NAMES[sty])
         io.open(os.path.join(OUT, fn), 'w', encoding='utf-8').write(
             build(target='%s. %s' % (t['code'], t['name']), idx=v, style=sty,
                   style_name=NAMES[sty], mood=MOODS[sty], theme=t['theme'], cards=cs,
                   prefix='%s_시안%d' % (t['slug'], v),
-                  title='%s · 시안%d (%s)' % (t['name'], v, NAMES[sty])))
+                  title='%s · 시안%d (%s)' % (t['name'], v, NAMES[sty]),
+                  foot=t.get('foot', 'go24')))
         dogs = sum(1 for c in cs if c.get('dog'))
-        made.append((fn, t, v, NAMES[sty], MOODS[sty], len(cs)))
+        made.append((fn, t, v, NAMES[sty], MOODS[sty], len(cs), bool(t.get('pick'))))
         print('✓ %-44s %dKB · 강아지 %d장' % (fn, os.path.getsize(os.path.join(OUT, fn))//1024, dogs))
 
 rows = ''
 cur = None
-for fn, t, v, sname, mood, n in made:
+for fn, t, v, sname, mood, n, fixed in made:
     if cur != t['code']:
         cur = t['code']
-        rows += '<h2>%s. %s <em>%s</em></h2><div class="grid">' % (t['code'], t['name'], t['mood'])
+        rows += '<h2>%s. %s <em>%s</em>%s</h2><div class="grid">' % (
+            t['code'], t['name'], t['mood'], '<b class="fix">확정</b>' if fixed else '')
     th = t['theme']
     sw = th['dark'] if 'deep' in fn or '딥톤' in sname else (th['beige'] if '베이지' in sname else (th['deep'] if '타이포' in sname else th['soft']))
     rows += ('<a class="it" href="./%s"><span class="sw" style="background:%s;border-color:%s"></span>'
              '<span class="tx"><b>시안%d · %s</b><small>%s · %d장</small></span>'
              '<span class="go">열기 &rsaquo;</span></a>') % (fn, sw, th['ac'], v, sname, mood, n)
-    if v == 2: rows += '</div>'
+    rows += '</div>' if (fixed or v == 2) else ''
 index = """<!doctype html><html lang="ko"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/><title>애견국비 광고 시안</title><style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -56,6 +61,8 @@ body{background:#121419;color:#E8EAEE;font-family:'Pretendard','Apple SD Gothic 
 h1{font-size:21px;font-weight:900;letter-spacing:-.03em}
 p.s{margin-top:8px;color:#858B97;font-size:13px;line-height:1.75}
 h2{margin:26px 0 9px;font-size:14px;font-weight:800;letter-spacing:-.02em}
+h2 b.fix{font-size:11px;font-weight:800;color:#0E1016;background:#8FE3A8;
+  padding:3px 9px;border-radius:999px;margin-left:6px}
 h2 em{font-style:normal;font-size:11.5px;font-weight:700;color:#8FA3C8;background:#232A36;
   padding:3px 9px;border-radius:999px;margin-left:7px}
 .moods{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
@@ -80,8 +87,8 @@ h2 em{font-style:normal;font-size:11.5px;font-weight:700;color:#8FA3C8;backgroun
 %s
 <div class="note"><b>강아지 컷아웃</b>은 흐름에 맞춰 <b>후킹 · 학원 소개 · 마무리 상담</b> 세 장에만 넣었습니다.
 자격 · 교육비 · 목록 카드는 정보 전달에 집중하도록 사진을 뺐습니다.<br/>
-<b>★확인필요</b> 표시는 학원 공식 채널 확인 후 교체할 자리입니다.<br/>
-<b>고용24 로고</b>는 「국비지원 신청 창구」 안내 용도로만 썼습니다. 정부 후원·승인으로 읽히지 않게 문구를 바꾸지 마세요.</div>
+<b>확정</b> 표시된 타깃은 고르신 시안만 남겨 두었습니다.<br/>
+<b>고용24 로고</b>는 「국민내일배움카드 국비지원 과정」 안내 용도로만 썼습니다. 정부 후원·승인으로 읽히지 않게 문구를 바꾸지 마세요.</div>
 </body></html>""" % rows
 io.open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(index)
 print('\n총', len(made), '개 + index.html')

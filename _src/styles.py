@@ -45,6 +45,10 @@ CARD_CSS = r"""
 .card .note{font-size:calc(var(--u)*18);line-height:1.6;font-weight:600;opacity:.72;word-break:keep-all}
 .card .sub,.card .txt{font-size:calc(var(--u)*28);line-height:1.76;font-weight:600;word-break:keep-all}
 .card .ttl{font-weight:900;letter-spacing:-.04em;word-break:keep-all}
+.card .ttl .hl{background:#fff;border-radius:calc(var(--u)*12);
+  padding:calc(var(--u)*4) calc(var(--u)*13);
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  box-shadow:0 calc(var(--u)*2) calc(var(--u)*9) rgba(0,0,0,.07)}
 .card .lst{list-style:none}
 .card .lst li{word-break:keep-all}
 .card .rows .v,.card .steps .sd{word-break:keep-all}
@@ -69,8 +73,7 @@ CARD_CSS = r"""
 .cute-pop .eye{align-self:flex-start;background:var(--ac);color:#fff;font-size:calc(var(--u)*22);
   font-weight:900;padding:calc(var(--u)*10) calc(var(--u)*22);border-radius:999px}
 .cute-pop .ttl{margin-top:calc(var(--u)*24);font-size:calc(var(--u)*68);line-height:1.36;color:var(--fg)}
-.cute-pop .ttl .hl{color:var(--deep);background:linear-gradient(transparent 62%,var(--soft) 0);
-  padding:0 calc(var(--u)*6);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cute-pop .ttl .hl{color:var(--deep)}
 .cute-pop .sub,.cute-pop .txt{margin-top:calc(var(--u)*22);color:var(--fg);opacity:.72}
 .cute-pop .lst{margin-top:calc(var(--u)*24);display:flex;flex-direction:column;gap:calc(var(--u)*12)}
 .cute-pop .lst li{display:flex;gap:calc(var(--u)*14);align-items:flex-start;background:#fff;
@@ -103,10 +106,10 @@ CARD_CSS = r"""
 .cute-pop .note{margin-top:calc(var(--u)*16);color:var(--fg)}
 .cute-pop .ftr{display:flex;justify-content:center;margin-top:calc(var(--u)*18)}
 .cute-pop .gobar{background:#fff;border-radius:999px;padding:calc(var(--u)*9) calc(var(--u)*18);color:var(--deep)}
-.cute-pop .dog{right:calc(var(--u)*-30);bottom:calc(var(--u)*-16);width:calc(var(--u)*430)}
-.cute-pop.t-hook .dog{width:calc(var(--u)*470)}
-.cute-pop.t-list .dog,.cute-pop.t-cta .dog{width:calc(var(--u)*250);right:calc(var(--u)*-24);
-  bottom:calc(var(--u)*-10);opacity:.96}
+.cute-pop .dog{right:0;bottom:0;width:calc(var(--u)*380)}
+.cute-pop.t-hook .dog{width:calc(var(--u)*410)}
+.cute-pop.t-list .dog{width:calc(var(--u)*215);right:calc(var(--u)*8);bottom:0}
+.cute-pop.t-cta .dog{width:calc(var(--u)*195);right:calc(var(--u)*10);bottom:calc(var(--u)*74)}
 
 /* ═══════ 귀여움 ② cute-bubble — 만화 말풍선 ═══════════════ */
 .cute-bubble{background:var(--soft)}
@@ -125,7 +128,7 @@ CARD_CSS = r"""
   font-weight:900;padding:calc(var(--u)*9) calc(var(--u)*20);border-radius:calc(var(--u)*10);
   transform:rotate(-2deg)}
 .cute-bubble .ttl{margin-top:calc(var(--u)*20);font-size:calc(var(--u)*64);line-height:1.34;color:var(--fg)}
-.cute-bubble .ttl .hl{color:var(--deep)}
+.cute-bubble .ttl .hl{color:var(--deep);background:var(--soft);box-shadow:none}
 .cute-bubble .sub,.cute-bubble .txt{margin-top:calc(var(--u)*18);color:var(--fg);opacity:.78}
 .cute-bubble .lst{display:flex;flex-direction:column;gap:calc(var(--u)*11);margin-top:calc(var(--u)*6)}
 .cute-bubble .lst li{display:flex;gap:calc(var(--u)*13);align-items:flex-start;font-size:calc(var(--u)*25);
@@ -157,9 +160,10 @@ CARD_CSS = r"""
 .cute-bubble .ftr{display:flex;justify-content:center;margin-top:calc(var(--u)*16)}
 .cute-bubble .gobar{background:#fff;border:calc(var(--u)*3) solid var(--fg);border-radius:999px;
   padding:calc(var(--u)*8) calc(var(--u)*18);color:var(--fg)}
-.cute-bubble .dog{right:calc(var(--u)*-24);bottom:calc(var(--u)*6);width:calc(var(--u)*360)}
-.cute-bubble.t-hook .dog{width:calc(var(--u)*420)}
-.cute-bubble.t-list .dog,.cute-bubble.t-cta .dog{width:calc(var(--u)*230);opacity:.95}
+.cute-bubble .dog{right:calc(var(--u)*6);bottom:calc(var(--u)*22);width:calc(var(--u)*330)}
+.cute-bubble.t-hook .dog{width:calc(var(--u)*360)}
+.cute-bubble.t-list .dog{width:calc(var(--u)*200)}
+.cute-bubble.t-cta .dog{width:calc(var(--u)*180);bottom:calc(var(--u)*88)}
 
 /* ═══════ 세련 ① chic-bold — 대형 타이포 ═══════════════════ */
 .chic-bold{background:var(--deep);color:#fff}
@@ -175,7 +179,7 @@ CARD_CSS = r"""
   padding:calc(var(--u)*9) calc(var(--u)*20);border-radius:calc(var(--u)*8);letter-spacing:.02em}
 .chic-bold .ttl{margin-top:calc(var(--u)*26);font-size:calc(var(--u)*88);line-height:1.22;
   letter-spacing:-.05em;color:#fff}
-.chic-bold .ttl .hl{color:var(--ac2)}
+.chic-bold .ttl .hl{color:var(--deep)}
 .chic-bold .sub,.chic-bold .txt{margin-top:calc(var(--u)*24);color:rgba(255,255,255,.84)}
 .chic-bold .lst{margin-top:calc(var(--u)*26)}
 .chic-bold .lst li{display:flex;gap:calc(var(--u)*16);align-items:flex-start;
@@ -206,10 +210,15 @@ CARD_CSS = r"""
 .chic-bold .ftr .cta{flex:1;background:var(--deep);color:#fff;text-align:center;border-radius:999px;
   font-size:calc(var(--u)*27);font-weight:900;padding:calc(var(--u)*19)}
 .chic-bold .gobar{color:var(--fg);flex:none}
-.chic-bold .dog{right:calc(var(--u)*-40);bottom:calc(var(--u)*122);width:calc(var(--u)*400);z-index:1}
-.chic-bold.t-hook .dog{width:calc(var(--u)*450);bottom:calc(var(--u)*118)}
-.chic-bold.t-list .dog,.chic-bold.t-cta .dog{width:calc(var(--u)*240);right:calc(var(--u)*-26);
-  bottom:calc(var(--u)*118);opacity:.92}
+.chic-bold .ftr.ig{flex-direction:column;align-items:center;gap:calc(var(--u)*13);
+  padding:calc(var(--u)*24) calc(var(--u)*50) calc(var(--u)*22)}
+.chic-bold .ftr.ig .cta{flex:none;width:auto;padding:calc(var(--u)*18) calc(var(--u)*74)}
+.chic-bold .ftr.ig .gobar{font-size:calc(var(--u)*19);opacity:.7}
+.card .gobar.insta{align-items:center;gap:calc(var(--u)*9);font-weight:800;letter-spacing:.01em}
+.card .gobar.insta svg{width:calc(var(--u)*26);height:calc(var(--u)*26);fill:none;stroke:currentColor;stroke-width:1.9}
+.chic-bold .dog{right:calc(var(--u)*6);bottom:calc(var(--u)*112);width:calc(var(--u)*350);z-index:1}
+.chic-bold.t-hook .dog{width:calc(var(--u)*390);bottom:calc(var(--u)*110)}
+.chic-bold.t-list .dog,.chic-bold.t-cta .dog{width:calc(var(--u)*200);right:calc(var(--u)*10);bottom:calc(var(--u)*112)}
 
 /* ═══════ 세련 ② chic-mono — 모던 미니멀 ═══════════════════ */
 .chic-mono{background:var(--bg)}
@@ -220,11 +229,12 @@ CARD_CSS = r"""
 .chic-mono .idx{position:absolute;right:calc(var(--u)*62);top:calc(var(--u)*150);
   font-size:calc(var(--u)*120);font-weight:900;color:var(--fg);opacity:.07;letter-spacing:-.06em;z-index:1}
 .chic-mono .bd{padding-top:calc(var(--u)*34)}
-.chic-mono .eye{align-self:flex-start;font-size:calc(var(--u)*20);font-weight:900;letter-spacing:.2em;
-  color:var(--ac)}
+.chic-mono .eye{align-self:flex-start;font-size:calc(var(--u)*21);font-weight:900;letter-spacing:.08em;
+  line-height:1.5;color:var(--ac)}
 .chic-mono .ttl{margin-top:calc(var(--u)*22);font-size:calc(var(--u)*62);line-height:1.34;color:var(--fg)}
 .chic-mono .ttl .hl{color:var(--ac)}
-.chic-mono .sub,.chic-mono .txt{margin-top:calc(var(--u)*22);opacity:.68}
+.chic-mono .sub{margin-top:calc(var(--u)*20);font-size:calc(var(--u)*27);font-weight:800;opacity:.92}
+.chic-mono .txt{margin-top:calc(var(--u)*20);opacity:.68}
 .chic-mono .lst{margin-top:calc(var(--u)*26)}
 .chic-mono .lst li{display:flex;gap:calc(var(--u)*18);align-items:flex-start;padding:calc(var(--u)*17) 0;
   border-top:calc(var(--u)*1) solid rgba(0,0,0,.14);font-size:calc(var(--u)*25);font-weight:700;line-height:1.5}
@@ -255,9 +265,10 @@ CARD_CSS = r"""
 .chic-mono .ftr{margin-top:calc(var(--u)*20);padding-top:calc(var(--u)*18);
   border-top:calc(var(--u)*1) solid rgba(0,0,0,.14);display:flex;justify-content:flex-start}
 .chic-mono .gobar{color:var(--fg);opacity:.8}
-.chic-mono .dog{right:calc(var(--u)*-26);bottom:calc(var(--u)*-14);width:calc(var(--u)*360);z-index:1}
-.chic-mono.t-hook .dog{width:calc(var(--u)*400)}
-.chic-mono.t-list .dog,.chic-mono.t-cta .dog{width:calc(var(--u)*215);opacity:.9}
+.chic-mono .dog{right:0;bottom:0;width:calc(var(--u)*330);z-index:1}
+.chic-mono.t-hook .dog{width:calc(var(--u)*370)}
+.chic-mono.t-list .dog{width:calc(var(--u)*195);right:calc(var(--u)*10)}
+.chic-mono.t-cta .dog{width:calc(var(--u)*175);right:calc(var(--u)*10);bottom:calc(var(--u)*82)}
 
 /* ═══════ 정적 ① calm-beige — 베이지 에디토리얼 ═══════════ */
 .calm-beige{background:var(--beige);color:var(--bfg)}
@@ -272,7 +283,7 @@ CARD_CSS = r"""
   margin:calc(var(--u)*22) 0 calc(var(--u)*4)}
 .calm-beige .ttl{margin-top:calc(var(--u)*20);font-size:calc(var(--u)*58);line-height:1.46;font-weight:700;
   letter-spacing:-.02em;font-family:var(--ffs)}
-.calm-beige .ttl .hl{color:var(--bac);font-weight:800}
+.calm-beige .ttl .hl{color:var(--bac);font-weight:800;border-radius:calc(var(--u)*10)}
 .calm-beige .sub,.calm-beige .txt{margin-top:calc(var(--u)*22);font-size:calc(var(--u)*26);
   line-height:1.9;font-weight:500;opacity:.78}
 .calm-beige .lst{margin-top:calc(var(--u)*26);width:100%}
@@ -305,12 +316,13 @@ CARD_CSS = r"""
 .calm-beige .note{margin-top:calc(var(--u)*18);font-weight:500}
 .calm-beige .ftr{display:flex;justify-content:center;margin-top:calc(var(--u)*18)}
 .calm-beige .gobar{opacity:.75;font-weight:700;letter-spacing:.02em}
-.calm-beige .dog{left:50%;transform:translateX(-50%);bottom:calc(var(--u)*-10);width:calc(var(--u)*360);z-index:1}
-.calm-beige.t-hook .dog{width:calc(var(--u)*400);bottom:calc(var(--u)*-14)}
+.calm-beige .dog{left:50%;transform:translateX(-50%);bottom:0;width:calc(var(--u)*340);z-index:1}
+.calm-beige.t-hook .dog{width:calc(var(--u)*370);bottom:0}
 .calm-beige.t-hook .bd{padding-bottom:calc(var(--u)*330)}
 .calm-beige.t-text .bd{padding-bottom:calc(var(--u)*300)}
-.calm-beige.t-list .dog,.calm-beige.t-cta .dog{width:calc(var(--u)*195);left:auto;right:calc(var(--u)*-16);
-  transform:none;bottom:calc(var(--u)*-12);opacity:.92}
+.calm-beige.t-list .dog{width:calc(var(--u)*180);left:auto;right:calc(var(--u)*10);transform:none;bottom:0}
+.calm-beige.t-cta .dog{width:calc(var(--u)*165);left:auto;right:calc(var(--u)*12);transform:none;
+  bottom:calc(var(--u)*70)}
 
 /* ═══════ 정적 ② calm-deep — 딥톤 정숙 ════════════════════ */
 .calm-deep{background:var(--dark);color:#F2EFE8}
@@ -325,7 +337,7 @@ CARD_CSS = r"""
   margin-top:calc(var(--u)*18)}
 .calm-deep .ttl{margin-top:calc(var(--u)*26);font-size:calc(var(--u)*64);line-height:1.38;font-weight:800;
   letter-spacing:-.03em;color:#FBF8F2}
-.calm-deep .ttl .hl{color:var(--gold)}
+.calm-deep .ttl .hl{color:var(--dark)}
 .calm-deep .sub,.calm-deep .txt{margin-top:calc(var(--u)*22);color:rgba(242,239,232,.72);
   font-size:calc(var(--u)*27);line-height:1.86}
 .calm-deep .lst{margin-top:calc(var(--u)*26)}
@@ -359,7 +371,20 @@ CARD_CSS = r"""
 .calm-deep .ftr{margin-top:calc(var(--u)*20);display:flex;justify-content:flex-start}
 .calm-deep .gobar{background:rgba(255,255,255,.95);color:#2A2A2A;border-radius:999px;
   padding:calc(var(--u)*8) calc(var(--u)*18)}
-.calm-deep .dog{right:calc(var(--u)*-22);bottom:calc(var(--u)*-28);width:calc(var(--u)*330);z-index:1}
-.calm-deep.t-hook .dog{width:calc(var(--u)*370);bottom:calc(var(--u)*-24)}
-.calm-deep.t-list .dog,.calm-deep.t-cta .dog{width:calc(var(--u)*195);right:calc(var(--u)*-14);opacity:.9}
+.calm-deep .dog{right:0;bottom:0;width:calc(var(--u)*320);z-index:1}
+.calm-deep.t-hook .dog{width:calc(var(--u)*350);bottom:0}
+.calm-deep.t-list .dog{width:calc(var(--u)*180);right:calc(var(--u)*10)}
+.calm-deep.t-cta .dog{width:calc(var(--u)*165);right:calc(var(--u)*12);bottom:calc(var(--u)*82)}
+
+/* 어두운 배경 시안 — 본문·목록 강조도 흰 박스로 또렷하게 */
+.chic-bold .lst li .hl,.chic-bold .sub .hl,.chic-bold .txt .hl,
+.chic-bold .steps .sh .hl,.chic-bold .steps .sd .hl,
+.calm-deep .lst li .hl,.calm-deep .sub .hl,.calm-deep .txt .hl,
+.calm-deep .rows .v .hl,.calm-deep .steps .sh .hl,.calm-deep .steps .sd .hl{
+  background:#fff;border-radius:calc(var(--u)*8);padding:calc(var(--u)*1) calc(var(--u)*10);
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.chic-bold .lst li .hl,.chic-bold .sub .hl,.chic-bold .txt .hl,
+.chic-bold .steps .sh .hl,.chic-bold .steps .sd .hl{color:var(--deep)}
+.calm-deep .lst li .hl,.calm-deep .sub .hl,.calm-deep .txt .hl,
+.calm-deep .rows .v .hl,.calm-deep .steps .sh .hl,.calm-deep .steps .sd .hl{color:var(--dark)}
 """
